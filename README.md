@@ -1,29 +1,54 @@
-# Kubernetes Template Project
+# Multi Network using DRA POC
 
-The Kubernetes Template Project is a template for starting new projects in the GitHub organizations owned by Kubernetes. All Kubernetes projects, at minimum, must have the following files:
+This POC demonstrates the usage of the PodNetwork API using DRA and an NRI plugin.
 
-- a `README.md` outlining the project goals, sponsoring sig, and community contact information
-- an `OWNERS` with the project leads listed as approvers ([docs on `OWNERS` files][owners])
-- a `CONTRIBUTING.md` outlining how to contribute to the project
-- an unmodified copy of `code-of-conduct.md` from this repo, which outlines community behavior and the consequences of breaking the code
-- a `LICENSE` which must be Apache 2.0 for code projects, or [Creative Commons 4.0] for documentation repositories, without any custom content
-- a `SECURITY_CONTACTS` with the contact points for the Product Security Team 
-  to reach out to for triaging and handling of incoming issues. They must agree to abide by the
-  [Embargo Policy](https://git.k8s.io/security/private-distributors-list.md#embargo-policy)
-  and will be removed and replaced if they violate that agreement.
+## Prerequisites
 
-## Community, discussion, contribution, and support
+- [Docker](https://docs.docker.com/get-docker/)
+- [Go](https://golang.org/doc/install)
+- [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
+- [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
-Learn how to engage with the Kubernetes community on the [community page](http://kubernetes.io/community/).
+## Setup
 
-You can reach the maintainers of this project at:
+1. **Create the Kind cluster, build the dranet image and load it into the cluster, and install the CRD and dranet daemonset.**
 
-- [Slack](https://slack.k8s.io/)
-- [Mailing List](https://groups.google.com/a/kubernetes.io/g/dev)
+   ```bash
+   make setup
+   ```
 
-### Code of conduct
+2. **Add a dummy network interface to the kind worker node.**
 
-Participation in the Kubernetes community is governed by the [Kubernetes Code of Conduct](code-of-conduct.md).
+   ```bash
+   make add-dummy-iface
+   ```
 
-[owners]: https://git.k8s.io/community/contributors/guide/owners.md
-[Creative Commons 4.0]: https://git.k8s.io/website/LICENSE
+3. **Deploy the sample resources.**
+
+   This will create a `DeviceClass`, a `ResourceClaim`, and a sample `Pod` that uses the `ResourceClaim`.
+
+   ```bash
+   make run-sample
+   ```
+
+## Verification
+
+To verify that the POC is working, check that the `dummy0` interface has been moved into the `pod1` container.
+
+```bash
+make verify
+```
+
+## Cleanup
+
+1. **Clean up the sample resources.**
+
+   ```bash
+   make clean-sample
+   ```
+
+2. **Delete the Kind cluster.**
+
+   ```bash
+   make clean-cluster
+   ```
