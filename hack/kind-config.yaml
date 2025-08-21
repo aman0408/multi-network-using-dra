@@ -1,12 +1,13 @@
-# hack/kind-config.yaml
+# kind-config.yaml
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
-# Enable the DRA feature gate
+name: mn-dra-poc
 featureGates:
   "DynamicResourceAllocation": true
   "DRAResourceClaimDeviceStatus": true
 nodes:
 - role: control-plane
-  image: kindest/node:v1.33.2
+- role: worker
+- role: worker
 runtimeConfig:
   "api/beta": true

@@ -40,11 +40,15 @@ deploy:
 # Run the full demo from start to finish
 demo: build kind-up kind-load deploy
 	@echo ">> Running demo script..."
-	@echo ">> Adding dummy0 interface"
-	docker exec ${KIND_CLUSTER_NAME}-control-plane ip link add dummy0 type dummy
-	docker exec ${KIND_CLUSTER_NAME}-control-plane ip link set up dev dummy0 
+	@echo ">> Adding dummy0 interface to worker node..."
+	docker exec ${KIND_CLUSTER_NAME}-worker ip link add dummy0 type dummy
+	docker exec ${KIND_CLUSTER_NAME}-worker ip link set up dev dummy0
+	@echo ">> Applying sample manifests..."
 	kubectl apply -f config/samples
-# 	./hack/demo.sh
+	@echo ">> Waiting for pod to be scheduled and running..."
+	kubectl wait --for=condition=Ready pod/test-pod-using-podnetwork --timeout=120s
+	@echo ">> Verifying pod is scheduled on the correct node (mn-dra-poc-worker)..."
+	@kubectl get pod test-pod-using-podnetwork -o wide
 
 # Remove all deployed Kubernetes manifests
 undeploy:
