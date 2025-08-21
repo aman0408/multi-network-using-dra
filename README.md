@@ -38,41 +38,6 @@ To run the demo, execute the following command:
 make demo
 ```
 
-## Verification
-
-After running the demo, you can verify that everything is working correctly.
-
-1.  **Check if the sample Pod is running**:
-
-    ```bash
-    kubectl get pods
-    ```
-
-    You should see a Pod named `pod1` with a status of `Running`.
-
-2.  **Verify the network interface has been moved**:
-
-    Check that the `dummy0` interface has been moved from the host to the `pod1` container.
-
-    ```bash
-    # The interface should NOT be present on the host
-    docker exec mn-dra-poc-control-plane ip link show dummy0
-    # The interface SHOULD be present inside the pod's network namespace
-    kubectl exec -it pod1 -- ip link show dummy0
-    ```
-
-3.  **Check the logs**:
-
-    You can inspect the logs from the controller and the plugin to see the reconciliation and allocation process.
-
-    ```bash
-    # Get controller logs
-    kubectl logs -n multi-network-using-dra-system -l control-plane=controller-manager
-
-    # Get plugin logs
-    kubectl logs -n multi-network-using-dra-system -l app=dra-plugin
-    ```
-
 ## Cleanup
 
 To clean up the resources created by the demo, you can use the following `make` targets.
