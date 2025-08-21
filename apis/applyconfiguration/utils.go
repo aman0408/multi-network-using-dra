@@ -19,9 +19,9 @@ limitations under the License.
 package applyconfiguration
 
 import (
-	apisv1alpha1 "github.com/aman0408/multi-network-using-dra/apis/applyconfiguration/apis/v1alpha1"
-	internal "github.com/aman0408/multi-network-using-dra/apis/applyconfiguration/internal"
-	v1alpha1 "github.com/aman0408/multi-network-using-dra/apis/v1alpha1"
+	apisv1alpha1 "sigs.k8s.io/multi-network/apis/applyconfiguration/apis/v1alpha1"
+	internal "sigs.k8s.io/multi-network/apis/applyconfiguration/internal"
+	v1alpha1 "sigs.k8s.io/multi-network/apis/v1alpha1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	testing "k8s.io/client-go/testing"

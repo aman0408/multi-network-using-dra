@@ -19,7 +19,7 @@ limitations under the License.
 package v1alpha1
 
 import (
-	apisv1alpha1 "github.com/aman0408/multi-network-using-dra/apis/v1alpha1"
+	apisv1alpha1 "sigs.k8s.io/multi-network/apis/v1alpha1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	listers "k8s.io/client-go/listers"
 	cache "k8s.io/client-go/tools/cache"

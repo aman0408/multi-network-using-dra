@@ -9,8 +9,8 @@ import (
 	"slices"
 	"time"
 
-	"github.com/aman0408/multi-network-using-dra/pkg/inventory"
-	"github.com/aman0408/multi-network-using-dra/pkg/podnet"
+	"sigs.k8s.io/multi-network/internal/inventory"
+	"sigs.k8s.io/multi-network/internal/podnet"
 	"github.com/containerd/nri/pkg/api"
 	"github.com/containerd/nri/pkg/stub"
 

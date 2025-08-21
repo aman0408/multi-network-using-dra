@@ -21,7 +21,7 @@ package externalversions
 import (
 	fmt "fmt"
 
-	v1alpha1 "github.com/aman0408/multi-network-using-dra/apis/v1alpha1"
+	v1alpha1 "sigs.k8s.io/multi-network/apis/v1alpha1"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
 )

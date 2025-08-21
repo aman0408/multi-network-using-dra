@@ -19,7 +19,7 @@ limitations under the License.
 package scheme
 
 import (
-	multinetworkv1alpha1 "github.com/aman0408/multi-network-using-dra/apis/v1alpha1"
+	multinetworkv1alpha1 "sigs.k8s.io/multi-network/apis/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"

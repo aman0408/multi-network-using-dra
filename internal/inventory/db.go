@@ -24,7 +24,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aman0408/multi-network-using-dra/pkg/podnet"
+	"sigs.k8s.io/multi-network/internal/podnet"
 	"github.com/vishvananda/netlink"
 	"github.com/vishvananda/netns"
 	"golang.org/x/time/rate"

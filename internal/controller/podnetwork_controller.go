@@ -20,7 +20,7 @@ import (
 	"context"
 	"fmt"
 
-	v1alpha1 "github.com/aman0408/multi-network-using-dra/apis/v1alpha1"
+	v1alpha1 "sigs.k8s.io/multi-network/apis/v1alpha1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/api/meta"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -39,10 +39,6 @@ type PodNetworkReconciler struct {
 
 const podNetworkFinalizer = "network.multi-network.x-k8s.io/finalizer"
 const provider = "podnetwork.example.com"
-
-// +kubebuilder:rbac:groups=multinetwork.networking.k8s.io,resources=podnetworks,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=multinetwork.networking.k8s.io,resources=podnetworks/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=multinetwork.networking.k8s.io,resources=podnetworks/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.

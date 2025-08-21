@@ -19,10 +19,10 @@ limitations under the License.
 package fake
 
 import (
-	applyconfiguration "github.com/aman0408/multi-network-using-dra/apis/applyconfiguration"
-	clientset "github.com/aman0408/multi-network-using-dra/pkg/client/clientset/versioned"
-	multinetworkv1alpha1 "github.com/aman0408/multi-network-using-dra/pkg/client/clientset/versioned/typed/apis/v1alpha1"
-	fakemultinetworkv1alpha1 "github.com/aman0408/multi-network-using-dra/pkg/client/clientset/versioned/typed/apis/v1alpha1/fake"
+	applyconfiguration "sigs.k8s.io/multi-network/apis/applyconfiguration"
+	clientset "sigs.k8s.io/multi-network/pkg/client/clientset/versioned"
+	multinetworkv1alpha1 "sigs.k8s.io/multi-network/pkg/client/clientset/versioned/typed/apis/v1alpha1"
+	fakemultinetworkv1alpha1 "sigs.k8s.io/multi-network/pkg/client/clientset/versioned/typed/apis/v1alpha1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"

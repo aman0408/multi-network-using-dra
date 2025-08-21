@@ -23,9 +23,9 @@ import (
 	sync "sync"
 	time "time"
 
-	versioned "github.com/aman0408/multi-network-using-dra/pkg/client/clientset/versioned"
-	apis "github.com/aman0408/multi-network-using-dra/pkg/client/informers/externalversions/apis"
-	internalinterfaces "github.com/aman0408/multi-network-using-dra/pkg/client/informers/externalversions/internalinterfaces"
+	versioned "sigs.k8s.io/multi-network/pkg/client/clientset/versioned"
+	apis "sigs.k8s.io/multi-network/pkg/client/informers/externalversions/apis"
+	internalinterfaces "sigs.k8s.io/multi-network/pkg/client/informers/externalversions/internalinterfaces"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"

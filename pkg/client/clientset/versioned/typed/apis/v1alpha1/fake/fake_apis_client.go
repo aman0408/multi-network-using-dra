@@ -19,7 +19,7 @@ limitations under the License.
 package fake
 
 import (
-	v1alpha1 "github.com/aman0408/multi-network-using-dra/pkg/client/clientset/versioned/typed/apis/v1alpha1"
+	v1alpha1 "sigs.k8s.io/multi-network/pkg/client/clientset/versioned/typed/apis/v1alpha1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )

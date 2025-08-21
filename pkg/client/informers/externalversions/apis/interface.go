@@ -19,8 +19,8 @@ limitations under the License.
 package apis
 
 import (
-	v1alpha1 "github.com/aman0408/multi-network-using-dra/pkg/client/informers/externalversions/apis/v1alpha1"
-	internalinterfaces "github.com/aman0408/multi-network-using-dra/pkg/client/informers/externalversions/internalinterfaces"
+	v1alpha1 "sigs.k8s.io/multi-network/pkg/client/informers/externalversions/apis/v1alpha1"
+	internalinterfaces "sigs.k8s.io/multi-network/pkg/client/informers/externalversions/internalinterfaces"
 )
 
 // Interface provides access to each of this group's versions.

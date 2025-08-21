@@ -21,8 +21,8 @@ package v1alpha1
 import (
 	http "net/http"
 
-	apisv1alpha1 "github.com/aman0408/multi-network-using-dra/apis/v1alpha1"
-	scheme "github.com/aman0408/multi-network-using-dra/pkg/client/clientset/versioned/scheme"
+	apisv1alpha1 "sigs.k8s.io/multi-network/apis/v1alpha1"
+	scheme "sigs.k8s.io/multi-network/pkg/client/clientset/versioned/scheme"
 	rest "k8s.io/client-go/rest"
 )
 

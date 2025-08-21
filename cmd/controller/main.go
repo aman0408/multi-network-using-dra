@@ -18,8 +18,8 @@ import (
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
-	podnetworkv1alpha1 "github.com/aman0408/multi-network-using-dra/apis/v1alpha1"
-	"github.com/aman0408/multi-network-using-dra/pkg/controller"
+	podnetworkv1alpha1 "sigs.k8s.io/multi-network/apis/v1alpha1"
+	"sigs.k8s.io/multi-network/internal/controller"
 )
 
 var (
@@ -95,7 +95,6 @@ func main() {
 		setupLog.Error(err, "unable to create controller", "controller", "PodNetwork")
 		os.Exit(1)
 	}
-	//+kubebuilder:scaffold:builder
 
 	if err := mgr.AddHealthzCheck("healthz", healthz.Ping); err != nil {
 		setupLog.Error(err, "unable to set up health check")

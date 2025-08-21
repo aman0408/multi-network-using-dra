@@ -23,8 +23,8 @@ import (
 	types "k8s.io/apimachinery/pkg/types"
 	managedfields "k8s.io/apimachinery/pkg/util/managedfields"
 	v1 "k8s.io/client-go/applyconfigurations/meta/v1"
-	internal "github.com/aman0408/multi-network-using-dra/apis/applyconfiguration/internal"
-	apisv1alpha1 "github.com/aman0408/multi-network-using-dra/apis/v1alpha1"
+	internal "sigs.k8s.io/multi-network/apis/applyconfiguration/internal"
+	apisv1alpha1 "sigs.k8s.io/multi-network/apis/v1alpha1"
 )
 
 // PodNetworkApplyConfiguration represents a declarative configuration of the PodNetwork type for use

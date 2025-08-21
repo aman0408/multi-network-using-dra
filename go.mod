@@ -3,7 +3,6 @@ module sigs.k8s.io/multi-network
 go 1.24.4
 
 require (
-	github.com/aman0408/multi-network-using-dra v0.0.0-20250813234523-e9acf1775765
 	github.com/containerd/nri v0.9.0
 	github.com/vishvananda/netlink v1.3.1
 	github.com/vishvananda/netns v0.0.5
@@ -81,8 +80,4 @@ require (
 	sigs.k8s.io/yaml v1.4.0 // indirect
 )
 
-// replace github.com/aman0408/multi-network-using-dra => ./
-
-// replace sigs.k8s.io/multi-network => ./
-
-replace github.com/aman0408/multi-network-using-dra => ./
+replace sigs.k8s.io/multi-network => ./
