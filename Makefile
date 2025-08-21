@@ -1,5 +1,6 @@
-.PHONY: all build docker-build kind-up kind-load deploy demo clean undeploy kind-down
-IMG ?= dranet-plugin:latest
+.PHONY: all build docker-build-controller docker-build-plugin kind-up kind-load deploy demo clean undeploy kind-down
+CONTROLLER_IMG ?= dra-controller:latest
+PLUGIN_IMG ?= dra-plugin:latest
 KIND_CLUSTER_NAME=mn-dra-poc
 
 # Build the Go binaries for the controller and plugin
@@ -8,10 +9,15 @@ build:
 	go build -o bin/controller ./cmd/controller
 	go build -o bin/plugin ./cmd/plugin
 
-# Build the Docker image containing both binaries
-docker-build:
-	@echo ">> Building Docker image..."
-	docker build -t ${IMG} .
+# Build the Docker image for the controller
+docker-build-controller:
+	@echo ">> Building controller image..."
+	docker build -t ${CONTROLLER_IMG} -f Dockerfile.controller .
+
+# Build the Docker image for the plugin
+docker-build-plugin:
+	@echo ">> Building plugin image..."
+	docker build -t ${PLUGIN_IMG} -f Dockerfile.driver .
 
 # Create a kind cluster using the specific config
 kind-up:
@@ -19,9 +25,10 @@ kind-up:
 	kind create cluster --name ${KIND_CLUSTER_NAME} --config=./hack/kind-config.yaml
 
 # Load the Docker image into the kind cluster
-kind-load: docker-build
+kind-load: docker-build-controller docker-build-plugin
 	@echo ">> Loading Docker image '${IMG}' into Kind..."
-	kind load docker-image ${IMG} --name ${KIND_CLUSTER_NAME}
+	kind load docker-image ${CONTROLLER_IMG} --name ${KIND_CLUSTER_NAME}
+	kind load docker-image ${PLUGIN_IMG} --name ${KIND_CLUSTER_NAME}
 
 # Deploy all Kubernetes manifests to the cluster
 deploy:
@@ -31,8 +38,12 @@ deploy:
 	kubectl apply -f config/plugin
 
 # Run the full demo from start to finish
-demo: build kind-up docker-build kind-load deploy
+demo: build kind-up kind-load deploy
 	@echo ">> Running demo script..."
+	@echo ">> Adding dummy0 interface"
+	docker exec ${KIND_CLUSTER_NAME}-control-plane ip link add dummy0 type dummy
+	docker exec ${KIND_CLUSTER_NAME}-control-plane ip link set up dev dummy0 
+	kubectl apply -f config/samples
 # 	./hack/demo.sh
 
 # Remove all deployed Kubernetes manifests

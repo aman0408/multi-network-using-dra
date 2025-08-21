@@ -16,9 +16,6 @@ COPY . .
 # CGO_ENABLED=0 creates a static binary.
 RUN CGO_ENABLED=0 go build -o /controller ./cmd/controller
 
-# Build the plugin binary.
-RUN CGO_ENABLED=0 go build -o /plugin ./cmd/plugin
-
 
 # --- Stage 2: Final Image ---
 # Use a minimal Alpine Linux image as the final base.
@@ -26,10 +23,5 @@ FROM alpine:latest
 
 # Copy the controller binary from the builder stage.
 COPY --from=builder /controller /controller
-
-# Copy the plugin binary from the builder stage.
-COPY --from=builder /plugin /plugin
-
-# Note: We do not set an ENTRYPOINT or CMD here.
-# The command will be specified in the Kubernetes Deployment and DaemonSet manifests,
-# allowing this single image to run either the controller or the plugin.
+USER 65532:65532
+ENTRYPOINT ["/controller"]

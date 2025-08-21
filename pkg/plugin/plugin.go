@@ -112,7 +112,7 @@ func Start(ctx context.Context, driverName string, nodeName string, pnShare *pod
 	nriOpts := []stub.Option{
 		stub.WithPluginName(driverName),
 		stub.WithPluginIdx("00"),
-		stub.WithSocketPath(filepath.Join(driverPluginPath, "nri.sock")),
+		// stub.WithSocketPath(filepath.Join(driverPluginPath, "nri.sock")),
 	}
 	nriPlugin, err := stub.New(d, nriOpts...)
 	if err != nil {

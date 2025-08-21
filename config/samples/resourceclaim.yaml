@@ -12,29 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: resource.k8s.io/v1beta1
+apiVersion: resource.k8s.io/v1beta2
 kind:  ResourceClaim
 metadata:
-  name: dranet-network
+  name: dummy-network-interface
 spec:
   devices:
     requests:
-    - name: req-phy-interface
-      deviceClassName: multinic
-      selectors:
-        - cel:
-            expression: device.attributes["dra.net"].podNetwork.contains("dranet-net")
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: pod1
-  labels:
-    app: pod
-spec:
-  containers:
-  - name: ctr1
-    image: registry.k8s.io/e2e-test-images/agnhost:2.39
-  resourceClaims:
-  - name: dranet-network
-    resourceClaimName: dranet-network
+      - name: dummy-network-interface
+        exactly:
+          deviceClassName: podnetwork-interfaces
+          selectors:
+            - cel:
+                expression: has(device.attributes["dra.net"].podNetwork) && device.attributes["dra.net"].podNetwork == "my-dummy-network"

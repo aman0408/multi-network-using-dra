@@ -40,7 +40,7 @@ spec:
         - /controller
         args:
           - --health-probe-bind-address=:8081
-        image: dranet-plugin:latest
+        image: dra-controller:latest
         imagePullPolicy: Never
         name: manager
         ports: []

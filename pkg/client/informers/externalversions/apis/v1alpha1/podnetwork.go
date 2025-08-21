@@ -22,14 +22,14 @@ import (
 	context "context"
 	time "time"
 
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	runtime "k8s.io/apimachinery/pkg/runtime"
-	watch "k8s.io/apimachinery/pkg/watch"
-	cache "k8s.io/client-go/tools/cache"
 	multinetworkapiapisv1alpha1 "github.com/aman0408/multi-network-using-dra/apis/v1alpha1"
 	versioned "github.com/aman0408/multi-network-using-dra/pkg/client/clientset/versioned"
 	internalinterfaces "github.com/aman0408/multi-network-using-dra/pkg/client/informers/externalversions/internalinterfaces"
 	apisv1alpha1 "github.com/aman0408/multi-network-using-dra/pkg/client/listers/apis/v1alpha1"
+	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	runtime "k8s.io/apimachinery/pkg/runtime"
+	watch "k8s.io/apimachinery/pkg/watch"
+	cache "k8s.io/client-go/tools/cache"
 )
 
 // PodNetworkInformer provides access to a shared informer and lister for

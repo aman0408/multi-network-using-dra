@@ -49,7 +49,6 @@ var (
 )
 
 type DB struct {
-
 	mu       sync.RWMutex
 	podStore map[int]string // key: netnsid path value: Pod namespace/name
 
@@ -132,7 +131,6 @@ func (db *DB) Run(ctx context.Context) error {
 		}
 		for _, iface := range ifaces {
 			klog.V(7).InfoS("Checking network interface", "name", iface.Name)
-
 
 			// skip loopback interfaces
 			if iface.Flags&net.FlagLoopback != 0 {
