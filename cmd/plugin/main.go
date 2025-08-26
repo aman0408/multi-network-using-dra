@@ -3,9 +3,11 @@ package main
 import (
 	"context"
 	"flag"
+	"net/http"
 	"os"
 	"os/signal"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	podnetworkclientset "sigs.k8s.io/multi-network/pkg/client/clientset/versioned"
@@ -24,6 +26,11 @@ const (
 	hostnameOverride = ""
 )
 
+var (
+	healthzAddr = flag.String("healthz-addr", ":9177", "The address to listen on for health checks.")
+	ready atomic.Bool
+)
+
 func main() {
 	// Initialize klog and parse flags
 	klog.InitFlags(nil)
@@ -33,6 +40,8 @@ func main() {
 	logger := klog.NewKlogr()
 
 	logger.Info("Starting DRA/NRI Node Plugin")
+	
+	go startHealthzServer(*healthzAddr, &ready)
 
 	pnShare := &podnet.PNShare{
 		PodNetworkTrigger: make(chan bool),
@@ -82,11 +91,26 @@ func main() {
 	if err != nil {
 		klog.Fatalf("PodNetwork ctrl failed to start: %v", err)
 	}
+	ready.Store(true)
 	select {
 	case <-signalCh:
 		klog.Infof("Exiting: received signal")
 		cancel()
 	case <-ctx.Done():
+	}
+}
+
+func startHealthzServer(addr string, ready *atomic.Bool) {
+	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+		if ready.Load() {
+			w.WriteHeader(http.StatusOK)
+		} else {
+			w.WriteHeader(http.StatusServiceUnavailable)
+		}
+	})
+	klog.Infof("Starting healthz server on %s", addr)
+	if err := http.ListenAndServe(addr, nil); err != nil {
+		klog.Fatalf("Failed to start healthz server: %v", err)
 	}
 }
 
